@@ -1,0 +1,14 @@
+<div class="mt-4">
+    <p-card class="p-card-no-padding">
+        <p-carousel [value]="topRatedSeries.results" 
+                    [numVisible]="8" 
+                    [numScroll]="1" 
+                    [circular]="false" 
+                    [responsiveOptions]="carouselResponsiveOptions"
+                    [showIndicators]="false">
+            <ng-template let-item pTemplate="item">
+                <img class="media-tile cursor-pointer" *ngIf="item.poster_path" width="100%" (click)="navigateToSerieDetail(item)" src="{{'https://image.tmdb.org/t/p/original' + item.poster_path}}"/>
+            </ng-template>
+        </p-carousel>  
+    </p-card>
+</div>

@@ -1,0 +1,23 @@
+@import "primeng/resources/themes/viva-dark/theme.css";
+@import "primeng/resources/primeng.css";
+@import "./../node_modules/primeflex/primeflex.css";
+@import "primeicons/primeicons.css";
+
+.p-card-no-padding {
+    .p-card {
+        .p-card-content {
+            padding: 0;
+        }
+    }
+}
+
+.media-tile {
+    transition: transform .4s;
+    .p-card-body {
+        display: none;
+    }
+}
+
+.media-tile:hover {
+    transform: scale(1.06);
+}

@@ -1,0 +1,55 @@
+<div class="mt-4">
+    <p-button icon="pi pi-angle-left" (onClick)="navigateBack()" label="Back"></p-button>
+</div>
+<div *ngIf="movieDetails" class="flex justify-content-center mt-4">
+    <p-card class="p-card-no-padding">
+        <div class="flex justify-content-center justify-content-between">
+            <div *ngIf="movieDetails.poster_path" >
+                <img src="{{'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}}" width="350px"/>
+                <div class="flex">
+                    <div>
+                        <div class="text-center">
+                          Average rating  
+                        </div>
+                        <div class="text-center">
+                            <p-knob [ngModel]="movieDetails.vote_average" [max]="10"></p-knob>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-4">
+                <div class="mb-4">
+                   <div class="mb-0 text-3xl font-bold">{{movieDetails.original_title}}</div> 
+                   <div class="text-sm">Release date: {{movieDetails.release_date}}</div>
+                   <div class="text-sm">{{getMovieGenres(movieDetails)}}</div>
+                </div>
+                <p-accordion [activeIndex]="0" [multiple]="false">
+                    <p-accordionTab header="Overview">
+                        <p>{{movieDetails.overview}}</p>
+                    </p-accordionTab>
+                    <p-accordionTab header="Reviews">
+                        <label *ngIf="reviewsList.results.length === 0" class="text-sm">No reviews found.</label>
+                        <div *ngIf="reviewsList.results.length > 0">
+                            <p-card *ngFor="let review of reviewsList.results" styleClass="bg-gray-900 mb-4">
+                                <div>
+                                    <div class="flex align-items-center mb-2">
+                                        <img *ngIf="review.author_details.avatar_path"
+                                            width="40px" 
+                                            height="40px"
+                                            class="mr-2"
+                                            src="{{'https://image.tmdb.org/t/p/original' + review.author_details.avatar_path}}"/>
+                                        <div class="text-xl ">{{review.author}}</div>
+                                    </div>
+                                    <div class="text-xs mb-2">{{review.created_at | date: 'yyyy-mm-dd'}}</div>
+                                    <div class="text-xs">{{getReviewContent(review)}} <a href="{{review.url}}" target=”_blank”>...View all</a></div>
+                                </div>
+                            </p-card>
+                        </div>
+                        
+                        
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+        </div>
+    </p-card>
+</div>

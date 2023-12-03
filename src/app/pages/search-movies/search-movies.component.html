@@ -1,0 +1,31 @@
+<div class="flex justify-content-center w-full mt-4">
+    <div>
+        <div>
+            <input type="text" pInputText [(ngModel)]="searchInput" />
+        </div>
+        <div class="mt-2 flex justify-content-center">
+            <p-button label="Search" (onClick)="searchMovie()"></p-button>
+        </div>
+    </div>
+</div>
+<section *ngIf="hasMediaToShow()" class="mt-4 px-4">
+    <div class="grid">
+        <div *ngFor="let media of searchMediaResult.results" class="col-6 md:col-3 xl:col-2 media-tile" (click)="navigateToMovieDetail(media.id)">
+            <p-card class="movie-card cursor-pointer" styleClass="h-full" >
+                <ng-template pTemplate="header">
+                    <img *ngIf="media.poster_path" src="{{'https://image.tmdb.org/t/p/original' + media.poster_path}}"/>
+                    <img *ngIf="!media.poster_path" height="233px" src="../../../assets/image-not-found.jpg"/>
+                    <div class="text-md p-2 flex align-content-center h-full">{{media.title}}</div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+    <div class="flex justify-content-center mt-3">
+        <p-paginator 
+            (onPageChange)="searchMovie($event)"
+            [first]="1"
+            [rows]="searchMediaResult.total_results / searchMediaResult.total_pages" 
+            [totalRecords]="searchMediaResult.total_results">
+        </p-paginator>
+    </div>
+</section>
