@@ -1,27 +1,27 @@
 <div class="mt-4">
     <p-button icon="pi pi-angle-left" (onClick)="navigateBack()" label="Back"></p-button>
 </div>
-<div *ngIf="movieDetails" class="flex justify-content-center mt-4">
-    <p-card class="p-card-no-padding">
-        <div class="flex justify-content-center justify-content-between">
-            <div *ngIf="movieDetails.poster_path" >
-                <img src="{{'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}}" width="350px"/>
-                <div class="flex">
-                    <div>
-                        <div class="text-center">
-                          Average rating  
-                        </div>
-                        <div class="text-center">
-                            <p-knob [ngModel]="movieDetails.vote_average" [max]="10"></p-knob>
-                        </div>
-                    </div>
-                </div>
+<div *ngIf="movieDetails" class="flex justify-content-center mt-4 grid">
+    <p-card class="p-card-no-padding col-12 xl:col-9">
+        <div class="grid">
+            <div *ngIf="movieDetails.poster_path" class="col-12 md:col-4 image-container-height flex justify-content-center">
+                <img src="{{'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}}" class="image-max-height"/>
             </div>
-            <div class="px-4">
-                <div class="mb-4">
-                   <div class="mb-0 text-3xl font-bold">{{movieDetails.original_title}}</div> 
-                   <div class="text-sm">Release date: {{movieDetails.release_date}}</div>
-                   <div class="text-sm">{{getMovieGenres(movieDetails)}}</div>
+            <div class="px-4 col-12 md:col-8">
+                <div class="mb-4 flex justify-content-center md:justify-content-start">
+                    <div>
+                        <div class="mb-0 text-3xl font-bold">{{movieDetails.original_title}}</div> 
+                        <div class="text-sm">Release date: {{movieDetails.release_date}}</div>
+                        <div class="text-sm">{{getMovieGenres(movieDetails)}}</div>
+                    </div>
+                    <div class="ml-4">
+                            <div class="text-center">
+                                Average rating  
+                            </div>
+                            <div class="text-center mt-1">
+                                <p-knob [ngModel]="movieDetails.vote_average" [max]="10" [size]="60"></p-knob>
+                            </div>
+                    </div>
                 </div>
                 <p-accordion [activeIndex]="0" [multiple]="false">
                     <p-accordionTab header="Overview">
@@ -45,8 +45,6 @@
                                 </div>
                             </p-card>
                         </div>
-                        
-                        
                     </p-accordionTab>
                 </p-accordion>
             </div>

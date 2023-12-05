@@ -36,7 +36,7 @@ const routes: Routes = [
     path: 'series/:id',
     component: SeriesDetailComponent,
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({
